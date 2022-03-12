@@ -29,6 +29,7 @@ var pressionar = function (botao) {
   setInterval(() => {
     botao.classList.remove("pressed");
   }, 100);
+  verificar()
 };
 
 var round = function () {
@@ -40,13 +41,15 @@ var round = function () {
   pressionar(botao);
 };
 
-var gameOver = function () {};
+var gameOver = function () {
+
+};
 
 var verificar = function (botao) {
-  if (botao == serie[serie.length - 1]) {
-    round();
-  } else {
-    gameOver();
+  if(botao!=botoes[index]){
+    gameOver()
+  }else if(index == botoes.length){
+    round()
   }
 };
 
@@ -65,6 +68,7 @@ var handleKeyDown = function () {
 var inGame = false;
 var level = 0;
 var serie = [];
+var index = 0;
 var botoes = $(".button");
 $(document).keydown(handleKeyDown);
 botoes.click(handleClick);
