@@ -29,7 +29,7 @@ var pressionar = function (botao) {
   setInterval(() => {
     botao.classList.remove("pressed");
   }, 100);
-  verificar()
+  verificar();
 };
 
 var round = function () {
@@ -42,14 +42,18 @@ var round = function () {
 };
 
 var gameOver = function () {
-
+  wrongSound.play();
+  $("body").addClass("game-over");
+  setInterval(() => {
+    $("body").removeClass("game-over");
+  }, 100);
 };
 
 var verificar = function (botao) {
-  if(botao!=botoes[index]){
-    gameOver()
-  }else if(index == botoes.length){
-    round()
+  if (botao != botoes[index]) {
+    gameOver();
+  } else if (index == botoes.length) {
+    round();
   }
 };
 
