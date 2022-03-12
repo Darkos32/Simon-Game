@@ -26,17 +26,17 @@ var pressionar = function (botao) {
   var cor = botao.classList[1];
   playSound(cor);
   botao.classList.add("pressed");
-  setInterval(() => {
+  setTimeout(() => {
     botao.classList.remove("pressed");
   }, 100);
-  verificar();
 };
 
 var round = function () {
+  index = 0;
   level++;
   $("h1").text("Level " + level);
-  var index = Math.floor(Math.random() * 4);
-  var botao = botoes[index];
+  var pos = Math.floor(Math.random() * 4);
+  var botao = botoes[pos];
   serie.push(botao);
   pressionar(botao);
 };
@@ -47,19 +47,26 @@ var gameOver = function () {
   setInterval(() => {
     $("body").removeClass("game-over");
   }, 100);
+  serie = [];
+  index = 0;
 };
 
 var verificar = function (botao) {
-  if (botao != botoes[index]) {
+  if (botao != serie[index]) {
+    console.log(index)
     gameOver();
-  } else if (index == botoes.length) {
-    round();
+  } else if (index == serie.length - 1) {
+    setTimeout(() => {
+      round();
+    }, 1000);
   }
+  index++;
 };
 
 var handleClick = function (e) {
   var botao = e.target;
   pressionar(botao);
+  verificar(botao);
 };
 
 var handleKeyDown = function () {
