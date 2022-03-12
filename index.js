@@ -41,19 +41,26 @@ var round = function () {
   pressionar(botao);
 };
 
+var reset = () => {
+  serie = [];
+  index = 0;
+  level = 0;
+  inGame = false;
+};
+
 var gameOver = function () {
   wrongSound.play();
   $("body").addClass("game-over");
   setInterval(() => {
     $("body").removeClass("game-over");
   }, 100);
-  serie = [];
-  index = 0;
+  reset();
+  $("h1").text("Game Over, Press Any Key to Restart");
 };
 
 var verificar = function (botao) {
   if (botao != serie[index]) {
-    console.log(index)
+    console.log(index);
     gameOver();
   } else if (index == serie.length - 1) {
     setTimeout(() => {
